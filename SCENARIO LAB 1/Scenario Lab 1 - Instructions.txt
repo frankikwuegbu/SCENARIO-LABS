@@ -1,0 +1,4 @@
+A one floor Branch B of a sales company has called you in to implement
+redundancy in their network stating that they continue to experience frequent down time. 
+You are given access to their network topology as well as control over the network itself. 
+You are now expected to design a redundant network for them, flawlessly implement it to their current network as well as provide technical documentation of the improved system you have put in place.
