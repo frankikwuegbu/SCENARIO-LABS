@@ -1,0 +1,34 @@
+SCENARIO LAB 2 INSTRUCTIONS
+
+A random sales company is undergoing expansion which includes the addition of an IT team which you are part of. As a result of the expansion, new departments were created. You and your team are expected to reconfigure the existing infrastructure and integrate the instructed protocols.
+
+New departments:
+GROUND FLOOR
+-Sales
+-Accounting
+-IT
+
+FIRST FLOOR
+-HR
+-Directors
+
+tasks and protocols:
+1. new host
+-sales: 3 hosts
+-accounting: 1 host
+-IT: 2 hosts
+-HR: 1 host
+-Directors: 2 hosts
+
+2.VLANS
+3.DHCP
+4. SSH (routers only)
+5.NAT
+6.ACL
+- every department has access to IT
+-SALES has no access to departments in the first floor
+-DIRECTORS have access to all departments besides SALES
+-only IT is allowed access to the internet
+-only IT is allowed remote access to the routers
+
+!specific details like ip address and subnet scheme were intentionally not given. You and your team (but mostly you lol) are to use your discretion to decide on the best ip address and subnetting scheme to use for this particular scenario
