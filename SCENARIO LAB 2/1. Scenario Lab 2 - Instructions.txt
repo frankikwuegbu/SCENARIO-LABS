@@ -22,10 +22,11 @@ tasks and protocols:
 
 2.VLANS
 3.DHCP
-4. SSH (routers only)
+4.SSH (routers only)
 5.NAT
 6.ACL
-- every department has access to IT
+-every department has access to IT
+-IT has access to all departments
 -SALES has no access to departments in the first floor
 -DIRECTORS have access to all departments besides SALES
 -only IT is allowed access to the internet

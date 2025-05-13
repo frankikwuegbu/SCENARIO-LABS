@@ -1,0 +1,65 @@
+Scenario Lab 2 - Fix
+
+IP addresses
+-192.168.100.0/24 - hosts
+ /29 subnetting scheme
+
+-172.16.100.0/24 - point to points
+ /30 subnetting scheme
+
+FIXES
+1. VLANs
+New hosts were added as instructed and each department's hosts were added to a vlan named after the department itself.
+Having vlans means implementing ROAS on the router interface directly connected to the network. Each subint represents the default gate for each vlan in the network.
+* possible errors
+! the switch interface connected to the router MUST be a trunk port
+! the subints MUST be configured to support encapsulation dot1q before an ip address can be assigned
+
+NOTE: OSPF was not included as part of the changes to be made but given that the ip addresses will be changed, OSPF may be affected and so, it is important to pay attention to that.
+
+2. DHCP
+automatic address assignment has become key given the increased number of hosts and networks, hence DHCP. In this fix, DHCP is connected in the EXTERNAL-ROUTER. 5 pools are made available for the 5 different vlans in the network.
+Given that dhcp is not configured on the first hop, they have to be configured as relay agents in order to broadcast the DHCP discover message.
+* possible errors
+! the dhcp relay agent command should be applied on the subints as they are the interface directly connected to the vlans
+
+3. SSH (on routers)
+for ssh to be configured, a domain name, enable secret as well as a local user and secret combination has to be configured first.
+
+4. ACL
+to filter access around the network, acls are implemented. In this fix, 4 separate acls are configured and applied across the 3 different routers.
+GROUND-FLOOR-ROUTER
+
+ip acl SALES
+deny direcors
+permit any
+
+FIRST-FLOOR-ROUTER
+
+ip acl FIRST-FLOOR
+deny sales
+permit any
+
+EXTERNAL-ROUTER
+
+ip acl INTERNET
+permit it
+deny sales
+deny accounting
+deny hr
+deny directors
+permit any
+
+each of the routers can only be remotely accessed by IT and so this same ACL was added to all routers
+
+ip acl REMOTE-ACCESS
+permit it
+permit any
+
+*possible errors
+! the order of the ACE matters
+! permit any counteracts the explicit deny command
+! make sure to apply your acl correctly
+
+5. NAT
+to save the company money, the previously configures globally unique addresses were dropped and private ip addresses were used as indicated at the top. to access external resources though, a globally unique address is still need, enter NAT overload. The single globally unique address in the network exists in the s0/0/0 interface of the external router and is configured to be the source of all traffic coming from within the network
